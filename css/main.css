@@ -1,3 +1,107 @@
-* {
-    background-color: aqua;
+body {
+    background-color: lightgrey;
+    margin: 0 auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main {
+    width: 60%;
+    height: 60%;
+    justify-content: center;
+    align-items:center;
+}
+
+#console{
+    background-color:pink;
+    width: 500px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    border-radius: 25%;
+}
+
+#logo {
+    margin: 15px;
+
+}
+
+#buttons-section {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    margin: 0 auto;
+    flex-direction: row;
+}
+
+.button{
+    margin: 20px;
+    padding: 5px;
+    border-radius: 25%;
+}
+
+#outer-display {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+    border-radius: 25%;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+}
+.head-elements{
+    margin: 0 auto;
+}
+
+#name-age {
+    /* margin: 0 auto; */
+    display: flex;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+}
+
+#name, #age{
+    margin: 10px;
+}
+
+#metrics{
+    display: flex;
+    /* align-items: row; */
+    flex-direction: row;
+}
+
+.metric {
+    /* flex-direction: row; */
+    margin: 0 auto;
+    margin: 10px;
+    padding: 10px;
+}
+
+#inner-display {
+    background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 25%;
+}
+
+#egg {
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    border-radius: 25%;
 }

@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- css file -->
     <link rel="stylesheet" href="./css/main.css">
+    <!-- js file -->
     <script defer src = "./js/app.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamagotchi</title>
 </head>
 <body>
-    <h1>This is a Tamagotchi Website</h1>
-    
+    <main>
+        <div id="console">
+            <h1 id="logo">Tamagotchi</h1>
+            <section id="outer-display">
+                <div id = "name-age">
+                    <p class= "head-elements" id = "name"> Name: Fido </p>
+                    <p class= "head-elements" id="age"> Age: 10 yrs</p>
+                </div>
+                <section id = "inner-display">
+                    <img id = "egg" src = "./concept-notes/images/cartoon-egg.jpg" alt = "Your Digital Pet">
+                </section>
+                <footer id = "metrics">
+                    <p class = "metric" id = "hunger"> Hunger: 10 </p>
+                    <p class = "metric" id = "sleepy"> Sleepy: 10 </p>
+                    <p class = "metric" id = "bored"> Bored: 10 </p>
+                </footer>
+            </section>
+            <section id="buttons-section">
+                <button class = "button" id = "feed-me-btn"> FEED </button>
+                <button class = "button"id = "lites-out-btn">LIGHTS OUT</button>
+                <button class = "button"id = "play-btn">PLAY</button>
+            </section>
+        </div>
+        <!-- bonus -->
+        <div id = "keychain"></div>
+    </main> 
+    <footer id = "signature"> made by Nathan J Harris 2020</footer>
+        
 </body>
 </html>
