@@ -12,6 +12,7 @@ let sleepyness = 0;
 let happiness = 0;
 // color of the tamagotchi
 let tColor = null;
+const colorsArr = ['pink','blue','purple','green','white'];
 
 // ----- Cached DOM Elements ----- //
 
@@ -22,11 +23,9 @@ const sleepMe = document.getElementById('lites-out-btn');
 
 // ----- Event Listeners ----- //
 
-function addEventListeners (){
-    feedMe.addEventListener('click', handleFeed);
-    playMe.addEventListener('click', handlePlay);
-    sleepMe.addEventListener('click', handleSleep);
-}
+feedMe.addEventListener('click', handleFeed);
+playMe.addEventListener('click', handlePlay);
+sleepMe.addEventListener('click', handleSleep);
 
 // ----- Functions ----- // 
 
@@ -35,7 +34,6 @@ function setUp (){
     tColor = prompt("Select one of the following colors: Pink, Blue, Purple, Green, White");
     document.getElementById('name').innerText = `Name: ${name}`;
     document.getElementById('console').style.backgroundColor = tColor;
-    addEventListeners();
 }
 setUp();
 
