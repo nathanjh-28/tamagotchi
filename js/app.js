@@ -116,7 +116,7 @@ function timer (){
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
         changePetPic();
-        if (time % 1 === 0){
+        if (time % 5 === 0){
             addMetric ();
         }
         if (myTamagotchi.hunger > 9 ||myTamagotchi.sleepyness > 9 || myTamagotchi.happiness > 9 ){
