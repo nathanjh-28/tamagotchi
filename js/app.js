@@ -73,12 +73,12 @@ function changePetPic (){
     if (myTamagotchi.age > 15){
         document.getElementById('pet').src = './age-images/4.png';
     }
-    if (myTamagotchi.age > 18){
-        document.getElementById('pet').src = './age-images/5.png';
-    }
-    if (myTamagotchi.age > 25){
-        document.getElementById('pet').src = './age-images/6.png';
-    }
+    // if (myTamagotchi.age > 18){
+    //     document.getElementById('pet').src = './age-images/5.png';
+    // }
+    // if (myTamagotchi.age > 25){
+    //     document.getElementById('pet').src = './age-images/6.png';
+    // }
 }
 
 function updateMetric (){
@@ -111,7 +111,7 @@ let time = 0;
 function timer (){
     let timer = setInterval(function(){
         time++;
-        if (time % 30 === 0){
+        if (time % 5 === 0){
             myTamagotchi.age++;
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
