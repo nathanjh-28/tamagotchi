@@ -118,11 +118,10 @@ function bounceTime (){
     let bTimer = setInterval(function(){
         bTime++;
         if(bTime === 1){
-            pet.classList.add('animate__animated','animate__bounce');
+            pet.classList.add('animate__animated','animate__headShake');
         }
-        console.log(bTime);
         if (bTime === 3){
-            pet.classList.remove('animate__animated','animate__bounce');
+            pet.classList.remove('animate__animated','animate__headShake');
             bTime = 0;
             clearInterval(bTimer);
         }
@@ -207,6 +206,7 @@ function handleSleep(){
     if (myTamagotchi.sleepyness === 0){
         return;
     }
+    lightsOutTimer();
     myTamagotchi.sleepyness--;
     updateMetric();
 }
@@ -236,4 +236,49 @@ let aTime = 0
 // const animateCC = (element, animation, prefix = 'animate__') =>
 //     new Promise(resolve,reject )
 
+function blackOut (){
+    //change color of inner display to black
+    const black = document.getElementById('inner-display');
+    const blackStr = 'black';
+    black.style.backgroundColor = blackStr;
+    const myPet = document.getElementById('pet');
+    const petDisplay = 'none';
+    myPet.style.display = petDisplay;
+    //set display to none for #pet
+    // timer, change back after 3 seconds.
+}
 
+function lightsOn (){
+    const grey = document.getElementById('inner-display');
+    const greyStr = 'lightgrey';
+    grey.style.backgroundColor = greyStr;
+    const myPet = document.getElementById('pet');
+    myPet.style.display = null;
+}
+let lTime = 0;
+function lightsOutTimer (){
+    blackOut();
+    let lTimer = setInterval(function(){
+        lTime++;
+        if (lTime === 2){
+            lightsOn();
+            lTime = 0;
+            clearInterval(lTimer);
+        }
+    }, 1000);
+}
+
+// let bTime = 0
+// function bounceTime (){
+//     let bTimer = setInterval(function(){
+//         bTime++;
+//         if(bTime === 1){
+//             pet.classList.add('animate__animated','animate__bounce');
+//         }
+//         if (bTime === 3){
+//             pet.classList.remove('animate__animated','animate__bounce');
+//             bTime = 0;
+//             clearInterval(bTimer);
+//         }
+//     }, 1000);
+// }
