@@ -118,10 +118,10 @@ function bounceTime (){
     let bTimer = setInterval(function(){
         bTime++;
         if(bTime === 1){
-            pet.classList.add('animate__animated','animate__headShake');
+            pet.classList.add('animate__animated','animate__bounce');
         }
         if (bTime === 3){
-            pet.classList.remove('animate__animated','animate__headShake');
+            pet.classList.remove('animate__animated','animate__bounce');
             bTime = 0;
             clearInterval(bTimer);
         }
@@ -190,6 +190,7 @@ function handleFeed (){
     }
     myTamagotchi.hunger--;
     updateMetric();
+    feedTime();
 
 }
 function handlePlay(){
@@ -268,17 +269,17 @@ function lightsOutTimer (){
     }, 1000);
 }
 
-// let bTime = 0
-// function bounceTime (){
-//     let bTimer = setInterval(function(){
-//         bTime++;
-//         if(bTime === 1){
-//             pet.classList.add('animate__animated','animate__bounce');
-//         }
-//         if (bTime === 3){
-//             pet.classList.remove('animate__animated','animate__bounce');
-//             bTime = 0;
-//             clearInterval(bTimer);
-//         }
-//     }, 1000);
-// }
+let fTime = 0
+function feedTime (){
+    let fTimer = setInterval(function(){
+        fTime++;
+        if(fTime === 1){
+            pet.classList.add('animate__animated','animate__heartBeat');
+        }
+        if (fTime === 3){
+            pet.classList.remove('animate__animated','animate__heartBeat');
+            fTime = 0;
+            clearInterval(fTimer);
+        }
+    }, 1000);
+}
