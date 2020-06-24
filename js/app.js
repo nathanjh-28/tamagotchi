@@ -107,11 +107,11 @@ function deadTama(){
 }
 
 function moveLeft (){
-    $('#pet').animate({'left':'-=120px'},5000);
+    $('#pet').animate({'left':'-=100px'},5000);
 }
 
 function moveRight (){
-    $('#pet').animate({'left':'+=120px'},5000);
+    $('#pet').animate({'left':'+=100px'},5000);
 }
 
 
@@ -119,7 +119,7 @@ let time = 0;
 function timer (){
     let timer = setInterval(function(){
         time++;
-        if (time % 5 === 0){
+        if (time % 12 === 0){
             myTamagotchi.age++;
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
@@ -173,17 +173,26 @@ timer();
 
 function handleFeed (){
     // console.log('feed button has been clicked');
+    if (myTamagotchi.hunger === 0){
+        return;
+    }
     myTamagotchi.hunger--;
     updateMetric();
 
 }
 function handlePlay(){
     // console.log('play button has been clicked');
+    if (myTamagotchi.happiness === 0){
+        return;
+    }
     myTamagotchi.happiness--;
     updateMetric();
 }
 function handleSleep(){
     // console.log('sleep button has been clicked');
+    if (myTamagotchi.sleepyness === 0){
+        return;
+    }
     myTamagotchi.sleepyness--;
     updateMetric();
 }
