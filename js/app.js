@@ -106,6 +106,15 @@ function deadTama(){
     document.getElementById('pet').src = './age-images/dead.png';
 }
 
+function moveLeft (){
+    $('#pet').animate({'left':'-=120px'},5000);
+}
+
+function moveRight (){
+    $('#pet').animate({'left':'+=120px'},5000);
+}
+
+
 let time = 0;
 function timer (){
     let timer = setInterval(function(){
@@ -118,15 +127,23 @@ function timer (){
         if (time % 5 === 0){
             addMetric ();
         }
-        if (time % 2 === 0){
-            pet.classList.add('animate__animated','animate__bounce');
-            // pet.style.animation = 'bounce';
-            // const aniDur = "animation-duration"
-            // pet.style.animation.aniDur = '2s';
+        if(time % 20 !== 0 && time % 10 === 0){
+            moveLeft(); 
         }
-        if(time % 3 === 0){
-            pet.classList.remove('animate__animated', 'animate__bounce');
+        if (time % 20 === 0){
+            moveRight();
         }
+        console.log(time);
+
+        // if (time % 2 === 0){
+        //     pet.classList.add('animate__animated','animate__bounce');
+        //     // pet.style.animation = 'bounce';
+        //     // const aniDur = "animation-duration"
+        //     // pet.style.animation.aniDur = '2s';
+        // }
+        // if(time % 3 === 0){
+        //     pet.classList.remove('animate__animated', 'animate__bounce');
+        // }
         if (myTamagotchi.hunger > 9 ||myTamagotchi.sleepyness > 9 || myTamagotchi.happiness > 9 ){
            deadTama();
            clearInterval(timer); 
@@ -158,7 +175,7 @@ function handleFeed (){
     // console.log('feed button has been clicked');
     myTamagotchi.hunger--;
     updateMetric();
-    addBouncePet();
+
 }
 function handlePlay(){
     // console.log('play button has been clicked');
@@ -172,22 +189,22 @@ function handleSleep(){
 }
 
 let aTime = 0
-function addBouncePet (){
-    const pet = document.getElementById('pet');
-    pet.classList.add('animate__animated', 'animate__bounce');
-    function animationTimer () {
-        let aTimer = setInterval(function(){
-            aTime++;
-            if (aTime === 1){
-                pet.classList.remove('animate__animated', 'animate__bounce');   
-            }
-            if (aTime === 2){
-                clearInterval(aTimer);
-            }
-        }, 1000);
-    }
-    animationTimer ();
-}
+// function addBouncePet (){
+//     const pet = document.getElementById('pet');
+//     pet.classList.add('animate__animated', 'animate__bounce');
+//     function animationTimer () {
+//         let aTimer = setInterval(function(){
+//             aTime++;
+//             if (aTime === 1){
+//                 pet.classList.remove('animate__animated', 'animate__bounce');   
+//             }
+//             if (aTime === 2){
+//                 clearInterval(aTimer);
+//             }
+//         }, 1000);
+//     }
+//     animationTimer ();
+// }
 
 // function removeBouncePet (){
 //     pet.classList.remove('animate__animated', 'animate__bounce');
@@ -195,3 +212,5 @@ function addBouncePet (){
 
 // const animateCC = (element, animation, prefix = 'animate__') =>
 //     new Promise(resolve,reject )
+
+

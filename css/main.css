@@ -99,9 +99,23 @@ main {
     border-radius: 25%;
 }
 
+#petdiv {
+    position: relative;
+}
+
 #pet {
+    position: absolute;
+    left: -19px;
+    bottom: -76px;
     width: 150px;
     height: 150px;
-    justify-content: center;
-    border-radius: 25%;
+    /* animation-duration: 3s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-play-state: running; */
+
+    /* 3s linear infinite alternate slidein; */
+    /* border-radius: 25%; */
 }
