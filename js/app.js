@@ -1,34 +1,116 @@
 
 
 // ------------------------- Tamagotchi Script ------------------------------ //
-// last updated 6/25/2020 11:07AM by Nathan J Harris
+// last updated 6/25/2020 3:00PM by Nathan J Harris
 
-//used for speeding up the game when debugging.
-let ageSpeed = 60;
-function handleSpeed (){
-    ageSpeed = 1;
-}
+/* 
 
-//----- App State ----- //
+--- Table of Contents ---
+A. App State
+    a. Color Variables
+    b. Tamagotchi Object Template
+    c. Tamagotchi Class
 
-// const colorsArr = ['fairy pink','fairy blue','magic purple','magic green','magic white'];
+B. Cached Dom Elements
 
+C. Event Listeners
 
-// color options for tamagotchi
+D. Functions
+    1. getRandNum, get a random number with min and max
+    2. pickColor, function that converts color input in to pre selected color.
+    3. setColorPalette, Takes the color input and makes a color palette out of it.  
+    4. changePetPic change pet image at certain age marks
+    5. updateMetric, Update DOM elements when metics are added or subtracted
+    6. addMetric, Randomly selects a metric and adds 1 point to it.
+    7. deadTama, a function that controls the game over or your pet died state
+    8. youWin, Win state for when the pet reaches a certain age
+        
+        ANIMATIONS
+        11. moveLeft, animate pet left
+        12. moveRight, animate pet right
+        13. blackOut, Lights out for sleep state
+        14. lightsOn, lights on for coming back to awake state
+            
+            TIMER FUNCTIONS
+            21. timer, a timer that controls the game.  Adds age points, triggers other functions.
+            22. lightsOutTimer, timer function that triggers black out and lightsOn
+            23. feedTime, timer to control the animation for feed button
+            24. bounceTime a timer that controls the bounce animation adding and removing it.
+
+                DIALOGUE FUNCTIONS
+                31. yum, 32. removeYum, 33. zzz, 34. removeZzz, 35. yay, 36. removeYay, 
+                37. heWasLoved, dialogue when the pet lived a happy life.
+
+                    EVENT HANDLERS
+                    41. handleSubmit
+                    42. handleFeed
+                    43. handlePlay
+                    44. handleSleep
+                    45. handleSpeed
+*/
+
+//--A----- App State ----- //
+
+//--a.-- color variables for tamagotchi
 const pink = '#f2c4ca';
 const blue = '#9cc1db';
 const purple = '#A19EC6'; 
 const green = '#94D1CE';
 const white = 'lightgrey';
 
-// accent color corresponding to above color
-const darkPink = null;
-const darkBlue = null;
-const darkPurple = null;
-const darkGreen = null;
-const whiteDark = null;
+//--b.--starting point for our tamagotchi
+let tamaObjectTemplate = {
+    name: ' ',
+    age: 0,
+    hunger: getRandNum(0,5),
+    sleepyness: getRandNum(0,5),
+    happiness: getRandNum(0,5),
+    tColor: ' ',
+}
+//--c.--class for tamagotchi
+class CreateTama {
+    constructor(object) {
+        this.name = object.name;
+        this.age = object.age;
+        this.hunger = object.hunger;
+        this.sleepyness = object.sleepyness;
+        this.happiness = object.happiness;
+        this.tColor = object.tColor;
+    }
+}
 
-function pickColor(input){
+// I don't know why I have this here but if it's not here the whole thing doesn't work.
+// create object myTamagotchi
+const myTamagotchi = new CreateTama(tamaObjectTemplate);
+
+// --B----- Cached DOM Elements ----- //
+// variables for all buttons
+const speed = document.getElementById('speed');
+const submit = document.getElementById('submit');
+const feedMe = document.getElementById('feed');
+const playMe = document.getElementById('play-btn');
+const sleepMe = document.getElementById('lites-out-btn');
+const dia = document.getElementById('dialogue'); 
+
+
+// --C----- Event Listeners ----- //
+// event listeners for all buttons
+feedMe.addEventListener('click', handleFeed);
+playMe.addEventListener('click', handlePlay);
+sleepMe.addEventListener('click', handleSleep);
+submit.addEventListener('click', handleSubmit);
+speed.addEventListener('click',handleSpeed);
+
+// --D----- Functions ----- // 
+
+//--1-- copied from my space battle to make a random number with min/max
+function getRandNum (min,max){
+    let num = Math.floor(Math.random()*(max-min)+min);
+    return num;
+}
+
+// --2--function that converts color input in to pre selected color.  
+function pickColor (input){
     input = input.toLowerCase();
     if (input !== 'pink'&& input !== 'blue' && input !== 'purple' && input !=='green' && input !== 'white'){
         alert("You may only choose from Pink, Blue, Purple, Green, White");
@@ -51,51 +133,21 @@ function pickColor(input){
     }
 }
 
-
-let tamaObjectTemplate = {
-    name: ' ',
-    age: 0,
-    hunger: getRandNum(0,5),
-    sleepyness: getRandNum(0,5),
-    happiness: getRandNum(0,5),
-    tColor: ' ',
+//--3-- Takes the color input and makes a color palette out of it.  
+function setColorPalette (){
+    const colorInput = document.getElementById('TamaColor').value;
+    tamaObjectTemplate.tColor = pickColor(colorInput);
+    document.getElementById('console').style.backgroundImage = `radial-gradient(white 20%, ${tamaObjectTemplate.tColor} 80%)`;
+    document.getElementById('greeting').style.backgroundColor = tamaObjectTemplate.tColor;
+    document.getElementById('logo').style.color = tamaObjectTemplate.tColor;
+    const buttonsArr = document.getElementsByClassName('button')
+    buttonsArr[0].style.backgroundColor = tamaObjectTemplate.tColor;
+    buttonsArr[1].style.backgroundColor = tamaObjectTemplate.tColor;
+    buttonsArr[2].style.backgroundColor = tamaObjectTemplate.tColor;
+    document.getElementById('signature').style.backgroundColor = tamaObjectTemplate.tColor;
 }
 
-class CreateTama {
-    constructor(object) {
-        this.name = object.name;
-        this.age = object.age;
-        this.hunger = object.hunger;
-        this.sleepyness = object.sleepyness;
-        this.happiness = object.happiness;
-        this.tColor = object.tColor;
-    }
-}
-// ----- Cached DOM Elements ----- //
-const speed = document.getElementById('speed');
-const submit = document.getElementById('submit');
-const feedMe = document.getElementById('feed');
-const playMe = document.getElementById('play-btn');
-const sleepMe = document.getElementById('lites-out-btn');
-const dia = document.getElementById('dialogue'); 
-
-
-// ----- Event Listeners ----- //
-
-feedMe.addEventListener('click', handleFeed);
-playMe.addEventListener('click', handlePlay);
-sleepMe.addEventListener('click', handleSleep);
-submit.addEventListener('click', handleSubmit);
-speed.addEventListener('click',handleSpeed);
-
-// ----- Functions ----- // 
-
-//copied from my space battle to make a random number with min/max
-function getRandNum (min,max){
-    let num = Math.floor(Math.random()*(max-min)+min);
-    return num;
-}
-// change pet image at certain age marks
+//--4-- change pet image at certain age marks
 function changePetPic (){
     if (myTamagotchi.age > 3){
         document.getElementById('pet').src = './age-images/1.png';
@@ -111,14 +163,14 @@ function changePetPic (){
     }
 }
 
-//Update DOM elements when metics are added or subtracted
+//--5--Update DOM elements when metics are added or subtracted
 function updateMetric (){
     document.getElementById('hunger').innerText = `Hunger: ${myTamagotchi.hunger}`;
     document.getElementById('sleepy').innerText = `Sleepy: ${myTamagotchi.sleepyness}`;
     document.getElementById('bored').innerText = `Bored: ${myTamagotchi.happiness}`;
 }
 
-// randomly selects a metric and adds 1 point to it.
+//--6-- Randomly selects a metric and adds 1 point to it.
 function addMetric (){
     let num = getRandNum(1,3);
     if (num === 1){
@@ -132,12 +184,12 @@ function addMetric (){
     }
     updateMetric();
 }
-// a function that controls the game over or your pet died state
+//--7-- a function that controls the game over or your pet died state
 function deadTama(){
     console.log("he dead");
     document.getElementById('pet').src = './age-images/dead.png';
 }
-// Win state for when the pet reaches a certain age
+//--8--Win state for when the pet reaches a certain age
 function youWin(){
     alert("You win!!!")
     heWasLoved();
@@ -146,26 +198,25 @@ function youWin(){
 
 // >>>>>>>>>>>>>>>>>>>> Animations <<<<<<<<<<<<<<<<<<<<<<<<<<<< //
 
-// animate pet left
+//--11--animate pet left
 function moveLeft (){
     $('#pet').animate({'left':'-=200px'},5000);
 }
-// animare pet right
+//--12--animate pet right
 function moveRight (){
     $('#pet').animate({'left':'+=200px'},5000);
 }
-//lights out for sleep state
+//--13--lights out for sleep state
 function blackOut (){
     //change color of inner display to black
     const black = document.getElementById('inner-display');
-    const blackStr = 'black';
-    black.style.backgroundColor = blackStr;
+    black.style.backgroundColor = '#474747';
     const myPet = document.getElementById('pet');
     const petDisplay = 'none';
     myPet.style.display = petDisplay;
     zzz();
 }
-// lights on for coming back to awake state
+//--14--lights on for coming back to awake state
 function lightsOn (){
     const grey = document.getElementById('inner-display');
     const greyStr = 'lightgrey';
@@ -176,7 +227,7 @@ function lightsOn (){
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>> Timer Functions <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-//a timer that controls the game.  Adds age points, triggers other functions.  
+//--21-- a timer that controls the game.  Adds age points, triggers other functions.  
 let time = 0;
 function timer (){
     if (time > 0){
@@ -208,7 +259,7 @@ function timer (){
         }
     }, 1000);
 }
-// timer function that triggers black out and lightsOn
+//--22-- timer function that triggers black out and lightsOn
 let lTime = 0;
 function lightsOutTimer (){
     blackOut();
@@ -222,7 +273,7 @@ function lightsOutTimer (){
     }, 1000);
 }
 
-//timer to control the animation for feed button
+//--23-- timer to control the animation for feed button
 let fTime = 0
 function feedTime (){
     let fTimer = setInterval(function(){
@@ -239,7 +290,7 @@ function feedTime (){
         }
     }, 1000);
 }
-// a timer that controls the bounce animation adding and removing it.
+//--24-- a timer that controls the bounce animation adding and removing it.
 let bTime = 0
 function bounceTime (){
     let bTimer = setInterval(function(){
@@ -259,95 +310,60 @@ function bounceTime (){
 
 // >>>>>>>>> Functions for controlling the dialogue of the pet <<<<<<<<<<<
 
-//animate dialogue when eating
+//--31-- animate dialogue when eating
 function yum(){
     dia.innerText = 'YUM';
     dia.style.display = null;
     dia.classList.add('animate__animated','animate__headShake');
 }
-//remove dialogue when done eating
+//--32-- remove dialogue when done eating
 function removeYum (){
     dia.innerText = '';
     dia.style.display = null;
     dia.classList.remove('animate__animated','animate__headShake');
 }
-//animate dialogue when sleeping
+//--33-- animate dialogue when sleeping
 function zzz (){
     dia.innerText = 'ZZZ'
     dia.style.color = 'white';
     dia.classList.add('animate__animated','animate__headShake');
 }
-//remove dialogue when done sleeping
+//--34-- remove dialogue when done sleeping
 function removeZzz (){
     dia.style.color = 'black';
     dia.innerText = '';
     dia.classList.remove('animate__animated','animate__headShake');
 }
-//animate dialogue when playing
+//--35-- animate dialogue when playing
 function yay (){
     dia.innerText = 'YAY'
     dia.classList.add('animate__animated','animate__headShake');
 }
-//remove dialogue when done playing
+//--36-- remove dialogue when done playing
 function removeYay (){
     dia.innerText = '';
     dia.classList.remove('animate__animated','animate__headShake');
 }
-
-// update name and color in object, then in the DOM
-function updateNameColor (color){
-    // tamaObjectTemplate.name = name;
-    tamaObjectTemplate.tColor = color;
-    // document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
-    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
-}
-
+//--37-- dialogue for ending of the game
 function heWasLoved (){
     dia.innerText = 'they were loved...'
     dia.classList.add('animate__animated','animate__headShake');
 }
 
-
-// >>>>>>>>>>>>>>>>>>>>>> Launch Functions <<<<<<<<<<<<<<<<<<< //
-
-//set up the pet
-// function setUp (){
-    // tamaObjectTemplate.name = '';
-    // tamaObjectTemplate.tColor = '';
-    // document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
-    // document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor; 
-// }
-
-//Run SetUp at launch
-// setUp();
-
-// Create Tamagotchi object after setUp
-const myTamagotchi = new CreateTama(tamaObjectTemplate);
-
-
 //>>>>>>>>>>>>>>>>>>>>>>>>  Event Handlers <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// function for when you hit the submit button
+
+
+//--41-- function for when you hit the submit button
 function handleSubmit (){
+    // update the name in the object and the DOM
     tamaObjectTemplate.name = document.getElementById('TamaName').value;
-    // console.log(tamaName);
-    const colorInput = document.getElementById('TamaColor').value;
-    tamaObjectTemplate.tColor = pickColor(colorInput);
-    // console.log(tamaColor);
     document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
-    document.getElementById('console').style.backgroundImage = `radial-gradient(white 20%, ${tamaObjectTemplate.tColor} 80%)`;
-    document.getElementById('greeting').style.backgroundColor = tamaObjectTemplate.tColor;
-    document.getElementById('logo').style.color = tamaObjectTemplate.tColor;
-    const buttonsArr = document.getElementsByClassName('button')
-    buttonsArr[0].style.backgroundColor = tamaObjectTemplate.tColor;
-    buttonsArr[1].style.backgroundColor = tamaObjectTemplate.tColor;
-    buttonsArr[2].style.backgroundColor = tamaObjectTemplate.tColor;
-    // setUp();
-    var myTamagotchi = new CreateTama(tamaObjectTemplate);
+    setColorPalette();
     updateMetric();
     timer();
 }
-// feed button handler
+//--42-- feed button handler
 function handleFeed (){
     // console.log('feed button has been clicked');
     if (myTamagotchi.hunger === 0){
@@ -361,7 +377,7 @@ function handleFeed (){
     feedTime();
 
 }
-//play button handler
+//--43-- play button handler
 function handlePlay(){
     // console.log('play button has been clicked');
     if (myTamagotchi.happiness === 0){
@@ -374,7 +390,7 @@ function handlePlay(){
     updateMetric();
     bounceTime();
 }
-//sleep button handler
+//--44-- sleep button handler
 function handleSleep(){
     // console.log('sleep button has been clicked');
     if (myTamagotchi.sleepyness === 0){
@@ -386,22 +402,9 @@ function handleSleep(){
     lightsOutTimer();
     myTamagotchi.sleepyness--;
     updateMetric();
-
 }
-
-
-
-
-// function getBooleanAnswer (Question){
-//     let answer = prompt(`Yes or No: ${Question}`);
-//     answer = answer.toLowerCase();
-//     while (answer !== 'yes' && answer !== 'no'){
-//         answer = prompt(Question);
-//     }
-//     if (answer === 'yes'){
-//         return true;
-//     }
-//     if (answer === 'no'){
-//         return false;
-//     }
-// }
+//--45-- used for speeding up the game when debugging.
+let ageSpeed = 60;
+function handleSpeed (){
+    ageSpeed = 1;
+}

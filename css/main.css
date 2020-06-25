@@ -1,10 +1,8 @@
-/* 
-<a href='https://www.freepik.com/free-photos-vectors/background'>Background photo created by topntp26 - www.freepik.com</a> */
+
 
 #speed, #submit {
     outline: none;
 }
-
 .displayNone {
     margin: 20;
     padding: 10;
@@ -13,7 +11,7 @@
     align-items: center;
     margin: 0 auto;
     flex-direction: row;
-    
+    outline: none; 
 }
 #greetingBlock {
     display:flex;
@@ -30,12 +28,10 @@
     align-items: center;
     font-family: sans-serif;
     color: white;
-    background-color: gray;
+    background-color: lightgrey;
     
 }
-
 body {
-    /* background-color: gray; */
     background-image: url("../bg-image/4944.jpg");
     margin: 0 auto;
     display:flex;
@@ -43,14 +39,12 @@ body {
     align-items: center;
     flex-direction: column;
 }
-
 main {
     width: 60%;
     height: 60%;
     justify-content: center;
     align-items: center;
 }
-
 #console{
     background-color: lightgrey;
     width: 500px;
@@ -64,15 +58,12 @@ main {
     background-image: radial-gradient(white 20%, lightgrey 80%);
     box-shadow: 12px 18px 30px rgb(70, 70, 70);
 }
-
 #logo {
     margin: 15px;
     font-size: 40px;
     font-family: 'Indie Flower',cursive;
     color: lightgrey;
-
 }
-
 #buttons-section {
     display: flex;
     width: 50%;
@@ -80,7 +71,6 @@ main {
     margin: 0 auto;
     flex-direction: row;
 }
-
 .button{
     margin: 20px;
     padding: 5px;
@@ -95,14 +85,12 @@ main {
     box-shadow: 1px 2px 4px rgb(112, 112, 112);
     outline: none;
 }
-
 #outer-display {
     background-color: rgb(240, 240, 240);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* width: 310px; */
     width: 380px;
     height: 340px;
     border-radius: 3%;
@@ -114,7 +102,6 @@ main {
 .head-elements{
     margin: 0 auto;
 }
-
 #name-age {
     display: flex;
     flex-direction: row;
@@ -123,11 +110,9 @@ main {
     font-family: 'Press Start 2P', cursive;
     font-size: 12px;
 }
-
 #name, #age{
     margin: 10px;
 }
-
 #metrics{
     display: flex;
     flex-direction: row;
@@ -135,28 +120,23 @@ main {
     font-size: 10px;
     margin: -10px;
 }
-
 .metric {
     margin: 0 auto;
     margin: 10px;
     padding: 10px;
 }
-
 #inner-display {
     background-color: #e4e3e3;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* width: 250px; */
     width: 360px;
     height: 250px;
     border-radius: 25%;
 }
-
 #petdiv {
     position: relative;
 }
-
 #dialogue{
     position: absolute;
     left: -17px;
@@ -170,4 +150,19 @@ main {
     bottom: -76px;
     width: 150px;
     height: 150px;
+}
+
+#sigparent{
+    display: flex;
+    flex-direction: column;
+
+}
+#signature {
+    color: white;
+    background-color: lightgrey;
+    justify-content: center;
+    font-family: 'Indie Flower',cursive;
+    font-size: 20px;
+    margin: 0 auto;
+    padding: 0px;
 }
