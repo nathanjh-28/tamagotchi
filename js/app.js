@@ -188,6 +188,9 @@ function handleFeed (){
     if (myTamagotchi.hunger === 0){
         return;
     }
+    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
+        return;
+    }
     myTamagotchi.hunger--;
     updateMetric();
     feedTime();
@@ -198,6 +201,9 @@ function handlePlay(){
     if (myTamagotchi.happiness === 0){
         return;
     }
+    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
+        return;
+    }
     myTamagotchi.happiness--;
     updateMetric();
     bounceTime();
@@ -205,6 +211,9 @@ function handlePlay(){
 function handleSleep(){
     // console.log('sleep button has been clicked');
     if (myTamagotchi.sleepyness === 0){
+        return;
+    }
+    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
         return;
     }
     lightsOutTimer();
