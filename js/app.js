@@ -3,18 +3,59 @@
 // ------------------------- Tamagotchi Script ------------------------------ //
 // last updated 6/25/2020 11:07AM by Nathan J Harris
 
+//used for speeding up the game when debugging.
+let ageSpeed = 60;
 
 //----- App State ----- //
 
 // const colorsArr = ['fairy pink','fairy blue','magic purple','magic green','magic white'];
 
+
+// color options for tamagotchi
+const pink = '#f2c4ca';
+const blue = '#9cc1db';
+const purple = '#A19EC6'; 
+const green = '94D1CE';
+const white = '#edf0fc';
+
+// accent color corresponding to above color
+const darkPink = null;
+const darkBlue = null;
+const darkPurple = null;
+const darkGreen = null;
+const whiteDark = null;
+
+function pickColor(input){
+    input = input.toLowerCase();
+    if (input !== 'pink'&& input !== 'blue' && input !== 'purple' && input !=='green' && input !== 'white'){
+        alert("You may only choose from Pink, Blue, Purple, Green, White");
+        return;
+    }
+    if(input === 'pink'){
+        return pink;
+    }
+    if(input === 'blue'){
+        return blue;
+    }
+    if(input === 'purple'){
+        return purple;
+    }
+    if(input === 'green'){
+        return green;
+    }
+    if(input === 'white'){
+        return white;
+    }
+}
+
+
 let tamaObjectTemplate = {
-    // name: null,
+    name: ' ',
     age: 0,
     hunger: getRandNum(0,5),
     sleepyness: getRandNum(0,5),
     happiness: getRandNum(0,5),
-    // tColor: ,
+    tColor: ' ',
 }
 
 class CreateTama {
@@ -132,9 +173,12 @@ function lightsOn (){
 //a timer that controls the game.  Adds age points, triggers other functions.  
 let time = 0;
 function timer (){
+    if (time > 0){
+        return;
+    }
     let timer = setInterval(function(){
         time++;
-        if (time % 1 === 0){
+        if (time % ageSpeed === 0){
             myTamagotchi.age++;
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
@@ -244,19 +288,27 @@ function removeYay (){
     dia.classList.remove('animate__animated','animate__headShake');
 }
 
-
-//set up the pet
-function setUp (){
-    tamaObjectTemplate.name = '';
-    tamaObjectTemplate.tColor = '';
-    document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
+// update name and color in object, then in the DOM
+function updateNameColor (color){
+    // tamaObjectTemplate.name = name;
+    tamaObjectTemplate.tColor = color;
+    // document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
     document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
-
-    
 }
 
+
+// >>>>>>>>>>>>>>>>>>>>>> Launch Functions <<<<<<<<<<<<<<<<<<< //
+
+//set up the pet
+// function setUp (){
+    // tamaObjectTemplate.name = '';
+    // tamaObjectTemplate.tColor = '';
+    // document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
+    // document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor; 
+// }
+
 //Run SetUp at launch
-setUp();
+// setUp();
 
 // Create Tamagotchi object after setUp
 const myTamagotchi = new CreateTama(tamaObjectTemplate);
@@ -266,9 +318,10 @@ const myTamagotchi = new CreateTama(tamaObjectTemplate);
 
 // function for when you hit the submit button
 function handleSubmit (){
-    tamaObjectTemplate.name = document.getElementById('TamaName').value
+    tamaObjectTemplate.name = document.getElementById('TamaName').value;
     // console.log(tamaName);
-    tamaObjectTemplate.tColor = document.getElementById('TamaColor').value
+    const colorInput = document.getElementById('TamaColor').value;
+    tamaObjectTemplate.tColor = pickColor(colorInput);
     // console.log(tamaColor);
     document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
     document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
