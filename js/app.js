@@ -18,7 +18,7 @@ function handleSpeed (){
 const pink = '#f2c4ca';
 const blue = '#9cc1db';
 const purple = '#A19EC6'; 
-const green = '94D1CE';
+const green = '#94D1CE';
 const white = '#edf0fc';
 
 // accent color corresponding to above color
@@ -335,7 +335,7 @@ function handleSubmit (){
     tamaObjectTemplate.tColor = pickColor(colorInput);
     // console.log(tamaColor);
     document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
-    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
+    document.getElementById('console').style.backgroundImage = `radial-gradient(white 20%, ${tamaObjectTemplate.tColor} 80%)`;
     // setUp();
     var myTamagotchi = new CreateTama(tamaObjectTemplate);
     updateMetric();
