@@ -1,5 +1,7 @@
 
 
+
+
 //----- App State ----- //
 
 const colorsArr = ['fairy pink','fairy blue','magic purple','magic green','magic white'];
@@ -25,16 +27,19 @@ class CreateTama {
 }
 // ----- Cached DOM Elements ----- //
 
+const submit = document.getElementById('submit');
 const feedMe = document.getElementById('feed');
 const playMe = document.getElementById('play-btn');
 const sleepMe = document.getElementById('lites-out-btn');
 const dia = document.getElementById('dialogue'); 
+
 
 // ----- Event Listeners ----- //
 
 feedMe.addEventListener('click', handleFeed);
 playMe.addEventListener('click', handlePlay);
 sleepMe.addEventListener('click', handleSleep);
+submit.addEventListener('click', handleSubmit)
 
 // ----- Functions ----- // 
 
@@ -167,6 +172,7 @@ function setUp (){
     tamaObjectTemplate.tColor = prompt(`Select one of the following colors: ${colorsArr}`);
     document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
     document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
+
     
 }
 
@@ -174,9 +180,23 @@ function setUp (){
 setUp();
 // Create Tamagotchi object after setUp
 const myTamagotchi = new CreateTama(tamaObjectTemplate);
+
 //Start Age Timer
-updateMetric();
-timer();
+
+
+
+function handleSubmit (){
+    tamaObjectTemplate.name = document.getElementById('TamaName').value
+    // console.log(tamaName);
+    tamaObjectTemplate.tColor = document.getElementById('TamaColor').value
+    // console.log(tamaColor);
+    document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
+    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
+    // setUp();
+    var myTamagotchi = new CreateTama(tamaObjectTemplate);
+    updateMetric();
+    timer();
+}
 
 function handleFeed (){
     // console.log('feed button has been clicked');

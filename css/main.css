@@ -1,4 +1,8 @@
 
+.displayNone {
+    display: null;
+}
+
 body {
     background-color: lightgrey;
     margin: 0 auto;
