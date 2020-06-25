@@ -22,6 +22,7 @@
     width: 420px;
     justify-content: center;
     align-items: center;
+    font-family: sans-serif;
 }
 
 body {
@@ -42,7 +43,7 @@ main {
 
 #console{
     background-color: lightgrey;
-    width: 420px;
+    width: 450px;
     height: 553px;
     display: flex;
     justify-content: center;
@@ -54,6 +55,8 @@ main {
 
 #logo {
     margin: 15px;
+    font-size: 40px;
+    font-family: 'Indie Flower',cursive;
 
 }
 
@@ -78,7 +81,8 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 310px;
+    /* width: 310px; */
+    width: 380px;
     height: 340px;
     border-radius: 3%;
     margin: 0 auto;
@@ -91,10 +95,11 @@ main {
 
 #name-age {
     display: flex;
-
     flex-direction: row;
     padding: 0px;
     margin: 0px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
 }
 
 #name, #age{
@@ -104,6 +109,8 @@ main {
 #metrics{
     display: flex;
     flex-direction: row;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
 }
 
 .metric {
@@ -117,7 +124,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 250px;
+    /* width: 250px; */
+    width: 360px;
     height: 250px;
     border-radius: 25%;
 }
@@ -131,10 +139,11 @@ main {
     left: -17px;
     bottom: 42px;
     color: black;
+    font-family: 'Press Start 2P', cursive;
 }
 #pet {
     position: absolute;
-    left: -19px;
+    left: 20px;
     bottom: -76px;
     width: 150px;
     height: 150px;

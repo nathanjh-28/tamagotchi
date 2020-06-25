@@ -140,17 +140,19 @@ function deadTama(){
 // Win state for when the pet reaches a certain age
 function youWin(){
     alert("You win!!!")
+    heWasLoved();
+    deadTama ();
 }
 
 // >>>>>>>>>>>>>>>>>>>> Animations <<<<<<<<<<<<<<<<<<<<<<<<<<<< //
 
 // animate pet left
 function moveLeft (){
-    $('#pet').animate({'left':'-=100px'},5000);
+    $('#pet').animate({'left':'-=200px'},5000);
 }
 // animare pet right
 function moveRight (){
-    $('#pet').animate({'left':'+=100px'},5000);
+    $('#pet').animate({'left':'+=200px'},5000);
 }
 //lights out for sleep state
 function blackOut (){
@@ -298,6 +300,11 @@ function updateNameColor (color){
     tamaObjectTemplate.tColor = color;
     // document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
     document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
+}
+
+function heWasLoved (){
+    dia.innerText = 'they were loved...'
+    dia.classList.add('animate__animated','animate__headShake');
 }
 
 
