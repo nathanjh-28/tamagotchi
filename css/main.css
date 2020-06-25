@@ -2,11 +2,30 @@
 .displayNone {
     margin: 20;
     padding: 10;
-    display: null;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: row;
+    
+}
+#greetingBlock {
+    display:flex;
+    flex-direction: row;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}
+#greeting {
+    margin: 10px;
+    padding: 10px;
+    width: 420px;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
-    background-color: lightgrey;
+    background-color: gray;
     margin: 0 auto;
     display:flex;
     justify-content: center;
@@ -18,11 +37,11 @@ main {
     width: 60%;
     height: 60%;
     justify-content: center;
-    align-items:center;
+    align-items: center;
 }
 
 #console{
-    background-color:lightblue;
+    background-color: lightgrey;
     width: 420px;
     height: 553px;
     display: flex;

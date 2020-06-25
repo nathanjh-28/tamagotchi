@@ -5,6 +5,9 @@
 
 //used for speeding up the game when debugging.
 let ageSpeed = 60;
+function handleSpeed (){
+    ageSpeed = 1;
+}
 
 //----- App State ----- //
 
@@ -69,7 +72,7 @@ class CreateTama {
     }
 }
 // ----- Cached DOM Elements ----- //
-
+const speed = document.getElementById('speed');
 const submit = document.getElementById('submit');
 const feedMe = document.getElementById('feed');
 const playMe = document.getElementById('play-btn');
@@ -82,7 +85,8 @@ const dia = document.getElementById('dialogue');
 feedMe.addEventListener('click', handleFeed);
 playMe.addEventListener('click', handlePlay);
 sleepMe.addEventListener('click', handleSleep);
-submit.addEventListener('click', handleSubmit)
+submit.addEventListener('click', handleSubmit);
+speed.addEventListener('click',handleSpeed);
 
 // ----- Functions ----- // 
 
