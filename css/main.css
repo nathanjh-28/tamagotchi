@@ -1,5 +1,7 @@
 
 .displayNone {
+    margin: 20;
+    padding: 10;
     display: null;
 }
 

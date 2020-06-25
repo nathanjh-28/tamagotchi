@@ -1,10 +1,12 @@
 
 
+// ------------------------- Tamagotchi Script ------------------------------ //
+// last updated 6/25/2020 11:07AM by Nathan J Harris
 
 
 //----- App State ----- //
 
-const colorsArr = ['fairy pink','fairy blue','magic purple','magic green','magic white'];
+// const colorsArr = ['fairy pink','fairy blue','magic purple','magic green','magic white'];
 
 let tamaObjectTemplate = {
     // name: null,
@@ -43,26 +45,12 @@ submit.addEventListener('click', handleSubmit)
 
 // ----- Functions ----- // 
 
+//copied from my space battle to make a random number with min/max
 function getRandNum (min,max){
     let num = Math.floor(Math.random()*(max-min)+min);
     return num;
 }
-
-// function getBooleanAnswer (Question){
-//     let answer = prompt(`Yes or No: ${Question}`);
-//     answer = answer.toLowerCase();
-//     while (answer !== 'yes' && answer !== 'no'){
-//         answer = prompt(Question);
-//     }
-//     if (answer === 'yes'){
-//         return true;
-//     }
-//     if (answer === 'no'){
-//         return false;
-//     }
-// }
-
-// change pet image
+// change pet image at certain age marks
 function changePetPic (){
     if (myTamagotchi.age > 3){
         document.getElementById('pet').src = './age-images/1.png';
@@ -76,20 +64,16 @@ function changePetPic (){
     if (myTamagotchi.age > 15){
         document.getElementById('pet').src = './age-images/4.png';
     }
-    // if (myTamagotchi.age > 18){
-    //     document.getElementById('pet').src = './age-images/5.png';
-    // }
-    // if (myTamagotchi.age > 25){
-    //     document.getElementById('pet').src = './age-images/6.png';
-    // }
 }
 
+//Update DOM elements when metics are added or subtracted
 function updateMetric (){
     document.getElementById('hunger').innerText = `Hunger: ${myTamagotchi.hunger}`;
     document.getElementById('sleepy').innerText = `Sleepy: ${myTamagotchi.sleepyness}`;
     document.getElementById('bored').innerText = `Bored: ${myTamagotchi.happiness}`;
 }
 
+// randomly selects a metric and adds 1 point to it.
 function addMetric (){
     let num = getRandNum(1,3);
     if (num === 1){
@@ -103,45 +87,54 @@ function addMetric (){
     }
     updateMetric();
 }
-
+// a function that controls the game over or your pet died state
 function deadTama(){
     console.log("he dead");
     document.getElementById('pet').src = './age-images/dead.png';
 }
-
+// Win state for when the pet reaches a certain age
 function youWin(){
     alert("You win!!!")
 }
 
+// >>>>>>>>>>>>>>>>>>>> Animations <<<<<<<<<<<<<<<<<<<<<<<<<<<< //
+
+// animate pet left
 function moveLeft (){
     $('#pet').animate({'left':'-=100px'},5000);
 }
-
+// animare pet right
 function moveRight (){
     $('#pet').animate({'left':'+=100px'},5000);
 }
-let bTime = 0
-function bounceTime (){
-    let bTimer = setInterval(function(){
-        bTime++;
-        if(bTime === 1){
-            pet.classList.add('animate__animated','animate__bounce');
-            yay();
-        }
-        if (bTime === 3){
-            pet.classList.remove('animate__animated','animate__bounce');
-            removeYay();
-            bTime = 0;
-            clearInterval(bTimer);
-        }
-    }, 1000);
+//lights out for sleep state
+function blackOut (){
+    //change color of inner display to black
+    const black = document.getElementById('inner-display');
+    const blackStr = 'black';
+    black.style.backgroundColor = blackStr;
+    const myPet = document.getElementById('pet');
+    const petDisplay = 'none';
+    myPet.style.display = petDisplay;
+    zzz();
 }
+// lights on for coming back to awake state
+function lightsOn (){
+    const grey = document.getElementById('inner-display');
+    const greyStr = 'lightgrey';
+    grey.style.backgroundColor = greyStr;
+    const myPet = document.getElementById('pet');
+    myPet.style.display = null;
+    removeZzz();
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>> Timer Functions <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+//a timer that controls the game.  Adds age points, triggers other functions.  
 let time = 0;
 function timer (){
     let timer = setInterval(function(){
         time++;
-        if (time % 60 === 0){
+        if (time % 1 === 0){
             myTamagotchi.age++;
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
@@ -165,97 +158,7 @@ function timer (){
         }
     }, 1000);
 }
-
-//set up the pet
-function setUp (){
-    tamaObjectTemplate.name = prompt("Enter the name of your pet");
-    tamaObjectTemplate.tColor = prompt(`Select one of the following colors: ${colorsArr}`);
-    document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
-    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
-
-    
-}
-
-//Run SetUp at launch
-setUp();
-// Create Tamagotchi object after setUp
-const myTamagotchi = new CreateTama(tamaObjectTemplate);
-
-//Start Age Timer
-
-
-
-function handleSubmit (){
-    tamaObjectTemplate.name = document.getElementById('TamaName').value
-    // console.log(tamaName);
-    tamaObjectTemplate.tColor = document.getElementById('TamaColor').value
-    // console.log(tamaColor);
-    document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
-    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
-    // setUp();
-    var myTamagotchi = new CreateTama(tamaObjectTemplate);
-    updateMetric();
-    timer();
-}
-
-function handleFeed (){
-    // console.log('feed button has been clicked');
-    if (myTamagotchi.hunger === 0){
-        return;
-    }
-    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
-        return;
-    }
-    myTamagotchi.hunger--;
-    updateMetric();
-    feedTime();
-
-}
-function handlePlay(){
-    // console.log('play button has been clicked');
-    if (myTamagotchi.happiness === 0){
-        return;
-    }
-    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
-        return;
-    }
-    myTamagotchi.happiness--;
-    updateMetric();
-    bounceTime();
-}
-function handleSleep(){
-    // console.log('sleep button has been clicked');
-    if (myTamagotchi.sleepyness === 0){
-        return;
-    }
-    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
-        return;
-    }
-    lightsOutTimer();
-    myTamagotchi.sleepyness--;
-    updateMetric();
-
-}
-
-function blackOut (){
-    //change color of inner display to black
-    const black = document.getElementById('inner-display');
-    const blackStr = 'black';
-    black.style.backgroundColor = blackStr;
-    const myPet = document.getElementById('pet');
-    const petDisplay = 'none';
-    myPet.style.display = petDisplay;
-    zzz();
-}
-
-function lightsOn (){
-    const grey = document.getElementById('inner-display');
-    const greyStr = 'lightgrey';
-    grey.style.backgroundColor = greyStr;
-    const myPet = document.getElementById('pet');
-    myPet.style.display = null;
-    removeZzz();
-}
+// timer function that triggers black out and lightsOn
 let lTime = 0;
 function lightsOutTimer (){
     blackOut();
@@ -269,6 +172,7 @@ function lightsOutTimer (){
     }, 1000);
 }
 
+//timer to control the animation for feed button
 let fTime = 0
 function feedTime (){
     let fTimer = setInterval(function(){
@@ -285,36 +189,149 @@ function feedTime (){
         }
     }, 1000);
 }
+// a timer that controls the bounce animation adding and removing it.
+let bTime = 0
+function bounceTime (){
+    let bTimer = setInterval(function(){
+        bTime++;
+        if(bTime === 1){
+            pet.classList.add('animate__animated','animate__bounce');
+            yay();
+        }
+        if (bTime === 3){
+            pet.classList.remove('animate__animated','animate__bounce');
+            removeYay();
+            bTime = 0;
+            clearInterval(bTimer);
+        }
+    }, 1000);
+}
 
+// >>>>>>>>> Functions for controlling the dialogue of the pet <<<<<<<<<<<
+
+//animate dialogue when eating
 function yum(){
     dia.innerText = 'YUM';
     dia.style.display = null;
     dia.classList.add('animate__animated','animate__headShake');
 }
-
+//remove dialogue when done eating
 function removeYum (){
     dia.innerText = '';
     dia.style.display = null;
     dia.classList.remove('animate__animated','animate__headShake');
 }
-
+//animate dialogue when sleeping
 function zzz (){
     dia.innerText = 'ZZZ'
     dia.style.color = 'white';
     dia.classList.add('animate__animated','animate__headShake');
 }
-
+//remove dialogue when done sleeping
 function removeZzz (){
     dia.style.color = 'black';
     dia.innerText = '';
     dia.classList.remove('animate__animated','animate__headShake');
 }
-
+//animate dialogue when playing
 function yay (){
     dia.innerText = 'YAY'
     dia.classList.add('animate__animated','animate__headShake');
 }
+//remove dialogue when done playing
 function removeYay (){
     dia.innerText = '';
     dia.classList.remove('animate__animated','animate__headShake');
 }
+
+
+//set up the pet
+function setUp (){
+    tamaObjectTemplate.name = '';
+    tamaObjectTemplate.tColor = '';
+    document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
+    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
+
+    
+}
+
+//Run SetUp at launch
+setUp();
+
+// Create Tamagotchi object after setUp
+const myTamagotchi = new CreateTama(tamaObjectTemplate);
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>  Event Handlers <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// function for when you hit the submit button
+function handleSubmit (){
+    tamaObjectTemplate.name = document.getElementById('TamaName').value
+    // console.log(tamaName);
+    tamaObjectTemplate.tColor = document.getElementById('TamaColor').value
+    // console.log(tamaColor);
+    document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
+    document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
+    // setUp();
+    var myTamagotchi = new CreateTama(tamaObjectTemplate);
+    updateMetric();
+    timer();
+}
+// feed button handler
+function handleFeed (){
+    // console.log('feed button has been clicked');
+    if (myTamagotchi.hunger === 0){
+        return;
+    }
+    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
+        return;
+    }
+    myTamagotchi.hunger--;
+    updateMetric();
+    feedTime();
+
+}
+//play button handler
+function handlePlay(){
+    // console.log('play button has been clicked');
+    if (myTamagotchi.happiness === 0){
+        return;
+    }
+    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
+        return;
+    }
+    myTamagotchi.happiness--;
+    updateMetric();
+    bounceTime();
+}
+//sleep button handler
+function handleSleep(){
+    // console.log('sleep button has been clicked');
+    if (myTamagotchi.sleepyness === 0){
+        return;
+    }
+    if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
+        return;
+    }
+    lightsOutTimer();
+    myTamagotchi.sleepyness--;
+    updateMetric();
+
+}
+
+
+
+
+// function getBooleanAnswer (Question){
+//     let answer = prompt(`Yes or No: ${Question}`);
+//     answer = answer.toLowerCase();
+//     while (answer !== 'yes' && answer !== 'no'){
+//         answer = prompt(Question);
+//     }
+//     if (answer === 'yes'){
+//         return true;
+//     }
+//     if (answer === 'no'){
+//         return false;
+//     }
+// }
