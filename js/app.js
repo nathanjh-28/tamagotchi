@@ -133,7 +133,7 @@ let time = 0;
 function timer (){
     let timer = setInterval(function(){
         time++;
-        if (time % 1 === 0){
+        if (time % 60 === 0){
             myTamagotchi.age++;
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
