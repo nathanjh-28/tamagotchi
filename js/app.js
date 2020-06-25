@@ -27,7 +27,8 @@ class CreateTama {
 
 const feedMe = document.getElementById('feed');
 const playMe = document.getElementById('play-btn');
-const sleepMe = document.getElementById('lites-out-btn'); 
+const sleepMe = document.getElementById('lites-out-btn');
+const dia = document.getElementById('dialogue'); 
 
 // ----- Event Listeners ----- //
 
@@ -120,9 +121,11 @@ function bounceTime (){
         bTime++;
         if(bTime === 1){
             pet.classList.add('animate__animated','animate__bounce');
+            yay();
         }
         if (bTime === 3){
             pet.classList.remove('animate__animated','animate__bounce');
+            removeYay();
             bTime = 0;
             clearInterval(bTimer);
         }
@@ -160,8 +163,8 @@ function timer (){
 
 //set up the pet
 function setUp (){
-tamaObjectTemplate.name = prompt("Enter the name of your pet");
-tamaObjectTemplate.tColor = prompt(`Select one of the following colors: ${colorsArr}`);
+    tamaObjectTemplate.name = prompt("Enter the name of your pet");
+    tamaObjectTemplate.tColor = prompt(`Select one of the following colors: ${colorsArr}`);
     document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
     document.getElementById('console').style.backgroundColor = tamaObjectTemplate.tColor;
     
@@ -211,32 +214,8 @@ function handleSleep(){
     lightsOutTimer();
     myTamagotchi.sleepyness--;
     updateMetric();
+
 }
-
-let aTime = 0
-// function addBouncePet (){
-//     const pet = document.getElementById('pet');
-//     pet.classList.add('animate__animated', 'animate__bounce');
-//     function animationTimer () {
-//         let aTimer = setInterval(function(){
-//             aTime++;
-//             if (aTime === 1){
-//                 pet.classList.remove('animate__animated', 'animate__bounce');   
-//             }
-//             if (aTime === 2){
-//                 clearInterval(aTimer);
-//             }
-//         }, 1000);
-//     }
-//     animationTimer ();
-// }
-
-// function removeBouncePet (){
-//     pet.classList.remove('animate__animated', 'animate__bounce');
-// }
-
-// const animateCC = (element, animation, prefix = 'animate__') =>
-//     new Promise(resolve,reject )
 
 function blackOut (){
     //change color of inner display to black
@@ -246,8 +225,7 @@ function blackOut (){
     const myPet = document.getElementById('pet');
     const petDisplay = 'none';
     myPet.style.display = petDisplay;
-    //set display to none for #pet
-    // timer, change back after 3 seconds.
+    zzz();
 }
 
 function lightsOn (){
@@ -256,6 +234,7 @@ function lightsOn (){
     grey.style.backgroundColor = greyStr;
     const myPet = document.getElementById('pet');
     myPet.style.display = null;
+    removeZzz();
 }
 let lTime = 0;
 function lightsOutTimer (){
@@ -276,11 +255,46 @@ function feedTime (){
         fTime++;
         if(fTime === 1){
             pet.classList.add('animate__animated','animate__heartBeat');
+            yum();
         }
         if (fTime === 3){
             pet.classList.remove('animate__animated','animate__heartBeat');
+            removeYum();
             fTime = 0;
             clearInterval(fTimer);
         }
     }, 1000);
+}
+
+function yum(){
+    dia.innerText = 'YUM';
+    dia.style.display = null;
+    dia.classList.add('animate__animated','animate__headShake');
+}
+
+function removeYum (){
+    dia.innerText = '';
+    dia.style.display = null;
+    dia.classList.remove('animate__animated','animate__headShake');
+}
+
+function zzz (){
+    dia.innerText = 'ZZZ'
+    dia.style.color = 'white';
+    dia.classList.add('animate__animated','animate__headShake');
+}
+
+function removeZzz (){
+    dia.style.color = 'black';
+    dia.innerText = '';
+    dia.classList.remove('animate__animated','animate__headShake');
+}
+
+function yay (){
+    dia.innerText = 'YAY'
+    dia.classList.add('animate__animated','animate__headShake');
+}
+function removeYay (){
+    dia.innerText = '';
+    dia.classList.remove('animate__animated','animate__headShake');
 }

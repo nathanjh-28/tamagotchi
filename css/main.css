@@ -113,8 +113,7 @@ main {
     position: absolute;
     left: -17px;
     bottom: 42px;
-    color: white;
-    display: none;
+    color: black;
 }
 #pet {
     position: absolute;
