@@ -23,14 +23,11 @@ class CreateTama {
         this.tColor = object.tColor;
     }
 }
-
-
 // ----- Cached DOM Elements ----- //
 
 const feedMe = document.getElementById('feed');
 const playMe = document.getElementById('play-btn');
 const sleepMe = document.getElementById('lites-out-btn'); 
-
 
 // ----- Event Listeners ----- //
 
@@ -106,6 +103,10 @@ function deadTama(){
     document.getElementById('pet').src = './age-images/dead.png';
 }
 
+function youWin(){
+    alert("You win!!!")
+}
+
 function moveLeft (){
     $('#pet').animate({'left':'-=100px'},5000);
 }
@@ -132,7 +133,7 @@ let time = 0;
 function timer (){
     let timer = setInterval(function(){
         time++;
-        if (time % 60 === 0){
+        if (time % 1 === 0){
             myTamagotchi.age++;
             document.getElementById('age').innerText = `Age: ${myTamagotchi.age}`
         }
@@ -146,21 +147,12 @@ function timer (){
         if (time % 20 === 0){
             moveRight();
         }
-
-        // if (time % 2 === 0){
-        //     pet.classList.add('animate__animated','animate__bounce');
-        //     // pet.style.animation = 'bounce';
-        //     // const aniDur = "animation-duration"
-        //     // pet.style.animation.aniDur = '2s';
-        // }
-        // if(time % 3 === 0){
-        //     pet.classList.remove('animate__animated', 'animate__bounce');
-        // }
         if (myTamagotchi.hunger > 9 ||myTamagotchi.sleepyness > 9 || myTamagotchi.happiness > 9 ){
            deadTama();
            clearInterval(timer); 
         }
-        if(myTamagotchi.age > 30){
+        if(myTamagotchi.age >= 30){
+            youWin();
             clearInterval(timer);
         }
     }, 1000);
