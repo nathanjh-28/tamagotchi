@@ -57,6 +57,9 @@ const blue = '#9cc1db';
 const purple = '#A19EC6'; 
 const green = '#94D1CE';
 const white = 'lightgrey';
+const turquoise = '#8CE0E8';
+const lavender = '#E3DCFA';
+
 
 //--b.--starting point for our tamagotchi
 let tamaObjectTemplate = {
@@ -112,8 +115,8 @@ function getRandNum (min,max){
 // --2--function that converts color input in to pre selected color.  
 function pickColor (input){
     input = input.toLowerCase();
-    if (input !== 'pink'&& input !== 'blue' && input !== 'purple' && input !=='green' && input !== 'white'){
-        alert("You may only choose from Pink, Blue, Purple, Green, White");
+    if (input !== 'pink'&& input !== 'blue' && input !== 'purple' && input !=='green' && input !== 'white' && input !== 'turquoise'&& input !== 'lavender'){
+        alert("You may only choose from Pink, Blue, Purple, Green, Lavender, Turquoise, White");
         return;
     }
     if(input === 'pink'){
@@ -130,6 +133,12 @@ function pickColor (input){
     }
     if(input === 'white'){
         return white;
+    }
+    if(input === 'turquoise'){
+    return turquoise;
+    }
+    if(input === 'lavender'){
+        return lavender;
     }
 }
 
@@ -253,7 +262,7 @@ function timer (){
            deadTama();
            clearInterval(timer); 
         }
-        if(myTamagotchi.age >= 30){
+        if(myTamagotchi.age >= 20){
             youWin();
             clearInterval(timer);
         }
@@ -357,6 +366,7 @@ function heWasLoved (){
 //--41-- function for when you hit the submit button
 function handleSubmit (){
     // update the name in the object and the DOM
+    document.getElementById('pet').src = './age-images/0.png';
     tamaObjectTemplate.name = document.getElementById('TamaName').value;
     document.getElementById('name').innerText = `Name: ${tamaObjectTemplate.name}`;
     setColorPalette();
@@ -406,5 +416,5 @@ function handleSleep(){
 //--45-- used for speeding up the game when debugging.
 let ageSpeed = 60;
 function handleSpeed (){
-    ageSpeed = 1;
+    ageSpeed = 2;
 }
