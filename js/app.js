@@ -60,6 +60,8 @@ const white = 'lightgrey';
 const turquoise = '#8CE0E8';
 const lavender = '#E3DCFA';
 
+const finalAge = 20;
+
 
 //--b.--starting point for our tamagotchi
 let tamaObjectTemplate = {
@@ -262,7 +264,7 @@ function timer (){
            deadTama();
            clearInterval(timer); 
         }
-        if(myTamagotchi.age >= 20){
+        if(myTamagotchi.age >= finalAge){
             youWin();
             clearInterval(timer);
         }
@@ -365,6 +367,9 @@ function heWasLoved (){
 
 //--41-- function for when you hit the submit button
 function handleSubmit (){
+    if(myTamagotchi.age === finalAge){
+        return;
+    }
     // update the name in the object and the DOM
     document.getElementById('pet').src = './age-images/0.png';
     tamaObjectTemplate.name = document.getElementById('TamaName').value;
@@ -377,6 +382,9 @@ function handleSubmit (){
 function handleFeed (){
     // console.log('feed button has been clicked');
     if (myTamagotchi.hunger === 0){
+        return;
+    }
+    if(myTamagotchi.age === finalAge){
         return;
     }
     if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
@@ -396,6 +404,9 @@ function handlePlay(){
     if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
         return;
     }
+    if(myTamagotchi.age === finalAge){
+        return;
+    }
     myTamagotchi.happiness--;
     updateMetric();
     bounceTime();
@@ -407,6 +418,9 @@ function handleSleep(){
         return;
     }
     if(myTamagotchi.hunger===10||myTamagotchi.happiness===10||myTamagotchi.sleepyness===10){
+        return;
+    }
+    if(myTamagotchi.age === finalAge){
         return;
     }
     lightsOutTimer();
